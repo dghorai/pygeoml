@@ -4,9 +4,7 @@ import pickle
 # import numpy as np
 
 from sklearn.metrics import accuracy_score, confusion_matrix, classification_report
-
-from src.exception import CustomException
-from src.logger import logging
+from logger import logging, CustomException
 
 
 def save_object(file_path, obj):
