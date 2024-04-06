@@ -12,13 +12,14 @@ import sys
 sys.path.append('src')
 
 from flask import Flask, request, render_template, jsonify
+from flask_cors import CORS, cross_origin
 
 # app = Flask(__name__)
 app = Flask(__name__, template_folder='templates')
+CORS(app)
 
 
-
-app_id = 1
+app_id = 3
 
 
 match app_id:
@@ -83,7 +84,41 @@ match app_id:
                 predict_pipeline = PredictPipeline()
                 results = predict_pipeline.predict(y_test)
                 return render_template('/classification/xgboost/results.html', final_result=results)
-            
+    
+    case 3:
+        from classification.cnn_classifier.pipeline.predict import PredictionPipeline
+        from classification.cnn_classifier.utils.utilities import decode_image
+        from consts import PRJ_DIR
+
+        os.putenv('LANG', 'en_US.UTF-8')
+        os.putenv('LC_ALL', 'en_US.UTF-8')
+
+        class ClientApp:
+            def __init__(self):
+                self.filename = os.path.join(PRJ_DIR, "artifacts", "classification", "cnn_classifier", "test_data", "input_image.jpg")
+                self.classifier = PredictionPipeline(self.filename)
+
+        @app.route("/", methods=['GET'])
+        @cross_origin()
+        def home():
+            return render_template('/classification/cnn_classifier/index.html')
+
+        @app.route("/train", methods=['GET', 'POST'])
+        @cross_origin()
+        def trainRoute():
+            os.system("python main.py")
+            return "Training done successfully!"
+
+        @app.route("/predict", methods=['POST'])
+        @cross_origin()
+        def predictRoute():
+            image = request.json['image']
+            decode_image(image, clApp.filename)
+            result = clApp.classifier.predict()
+            return jsonify(result)
+        # call client app
+        clApp = ClientApp()
+                    
 
 
 if __name__ == '__main__':

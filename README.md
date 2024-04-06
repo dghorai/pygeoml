@@ -1,4 +1,4 @@
-# machine-learning-projects
+# Data Science Application using AI/ML Algorithms
 
 - [Build an ensemble model to predict weather loan would be approved or not based on customer details](https://github.com/dghorai/loan-approval-prediction)
 - [Build the random forest model after normalizing the variable to house pricing from Boston data set](https://github.com/dghorai/random-forest-regression)
