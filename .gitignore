@@ -163,3 +163,5 @@ src/__pycache__
 logs/*
 .idea
 .vscode
+research/in-progress/*
+research/writing-notes/*
