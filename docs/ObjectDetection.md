@@ -189,14 +189,49 @@ Y = [pc, bx, by, bh, bw, c1, c2]
 3) Intersection Over Unions or IOU for short
 4) Non-Maximum Suppression. 
 
+Steps to follow:
+1) Input image
+2) Breaking an image into a grid
+3) Each section of the grid is classified and localized
+4) Predicts where to place bounding boxes based on regression-based algorithms
+
+Requirements:
+1) Yolov5 Repository
+2) Python 3.8 or later
+3) PyTorch (It is the most popular machine learning frameworks to define models, and perform training)
+4) CUDA (It is NVIDIA's parallel computing platform for their GPUs)
+
+Step-1: Install YOLOv5. Get YOLOv5 from here: 
+- i) manual download https://github.com/ultralytics/yolov5
+- ii) git clone https://github.com/ultralytics/yolov5.git
+
+Step-2: Install Python. get this from here:
+- https://www.python.org/downloads/
+
+Step-3: Install CUDA. Get this from here:
+- https://developer.nvidia.com/cuda-downloads
+
+Step-4: Install PyTorch as a Python module. Get the correct pip install version of this by selecting the preferences available at here: https://pytorch.org/get-started/locally/
+
+Step-5: Install additional modules for YOLOv5 available in requirements.txt inside of this folder
+- pip install -r requirements.txt
+- If visual studio error occure then get it from here to install:
+    - https://visualstudio.microsoft.com/downloads/
+- After that install PyCOCOTools:
+    - pip install git+https://github.com/philferriere/cocoapi.git#subdirectory=PythonAPI
+- Then further run this:
+    - pip install -r requirements.txt
+    - This is just for good measure.
+
 Further details can be found from this links:
 1) [YOLO Object Detection Explained](https://www.datacamp.com/blog/yolo-object-detection-explained)
 2) [What Is YOLO Algorithm?](https://www.baeldung.com/cs/yolo-algorithm)
+3) [YOLOv5 Object Detection on Windows (Step-By-Step Tutorial)](https://wandb.ai/onlineinference/YOLO/reports/YOLOv5-Object-Detection-on-Windows-Step-By-Step-Tutorial---VmlldzoxMDQwNzk4)
 
 
 Practical
 ==============
-1) Inference using pretrained YOLO model
+1) Inference using pretrained YOLOv5 model with Google Colab
 - Open Google Colab/Jupyter Notebook
 - Cloning Github Repository (! git clone https://github.com/ultralytics/yolov5)
 - Installling dependencies (! pip install -r requirements.txt)
@@ -228,7 +263,35 @@ print(
 ! python detect.py --img 640 --conf 0.4 --weights yolov5m.pt --source /full/path/of/the/test image folder
 ```
 
-2) Custom training and inference of YOLO model
+2) Inference using pretrained YOLOv5 model on Local System
+```
+## Using Webcamp Data
+#=====================
+# in cmd terminal, cd to YOLOv5 directory: > cd tolov5
+# type this line of code: python detect.py --source 0
+# Note: If there is multiple webcams or applications that spoof them we may need to change this number. If there is only one, then source will be 0 as in the example code.
+# To stop taking this simply click inside the open window.
+
+## Using Image Data
+#==================
+# If you want to detect objects in a pre-existing image, simply place the image in a folder within the YOLO directory. 
+# Opening up the YOLO Console again, we enter:
+# python detect.py --source images/google_image.jpg
+# Go to the location it's stored and see the new image with resultant bounding boxes
+
+## Using YouTube Video Data
+# Install few more modules to create bounding boxes or just detect objects on a YouTube video
+# pip install pafy
+# pip install youtube_dl
+# Get the youtube video id from video link (video id of this https://www.youtube.com/watch?v=jNQXAC9IVRw link is 'jNQXAC9IVRw')
+# Construct source link of the video id: https://youtu.be/jNQXAC9IVRw
+# Now in cmd terminal type this line to run: python detect.py --source https://youtu.be/jNQXAC9IVRw
+# press ctrl+C in terminal to stop
+# tested with this: python detect.py --source https://youtu.be/AmarqUQzqZg
+
+```
+
+3) Custom training and inference of YOLO model
 - Get new images
 - Download LabelImg annotation tool from here: https://github.com/HumanSignal/labelImg
 - Do annotation
