@@ -17,7 +17,22 @@ Object Detection Competitions
 Bounding Box
 =============
 
-Create a rectangle. Take two coordinates or center coordinates with width/height of the box to construct bouding box. Either considereding top-left corner and bottom-right corner coordinates or consideirng center point and with width/height of the box. Loss function is being calculated between predicted coordinates and actual coordinates of these.
+Create a rectangle. Take two coordinates or center coordinates with width/height of the box to construct bouding box. Either considereding top-left corner and bottom-right corner coordinates or consideirng center point and with width/height of the box. Loss function is being calculated between predicted coordinates and actual coordinates of these. Bounding boxes are used to `localize objects` within an image and are commonly annotated in object detection datasets to provide ground-truth information about the object’s location.
+
+- Bounding boxes represent the actual regions in an image that enclose objects of interest.
+- Bounding boxes are provided as annotations in object detection datasets, representing ground-truth object locations.
+- The object's true boundaries are the basis for bounding boxes, which are fixed.
+- Bounding boxes are used for object localization, and they are compared to predicted boxes to measure accuracy.
+
+Anchor Boxes
+=============
+
+[Anchor boxes](https://www.thinkautonomous.ai/blog/anchor-boxes/) are pre-defined bounding boxes with specific sizes, aspect ratios, and positions that are used as reference templates during object detection. Anchor boxes are placed at various positions across an image to capture objects of different scales and shapes. The locations and shapes of objects relative to reference boxes are predicted using anchor boxes during training and inference. 
+
+- Anchor boxes are reference bounding boxes used to predict object locations and shapes during object detection.
+- During model training and inference, anchor boxes are used as templates. The model predicts adjustments to anchor boxes to match the actual locations of the objects.
+- Different scales and aspect ratios can be used to handle various object sizes and shapes.
+- [The anchor boxes are used to predict object locations and shapes](https://towardsdatascience.com/training-yolo-select-anchor-boxes-like-this-3226cb8d7f0b).
 
 Bounding Box Regression
 =======================
@@ -179,14 +194,14 @@ YOLO Flow:
 
 The algorithm works based on the following four approaches:
 1) Residual blocks
-This first step starts by dividing the original image (A) into NxN grid cells of equal shape, where N in our case is 4 shown on the image on the right. Each cell in the grid is responsible for localizing and predicting the class of the object that it covers, along with the probability/confidence value. 
+This first step starts by dividing the original image (A) into NxN grid cells of equal shape. Each cell in the grid is responsible for localizing and predicting the class of the object that it covers, along with the probability/confidence value. 
 
 2) Bounding box regression
 The next step is to determine the bounding boxes which correspond to rectangles highlighting all the objects in the image. We can have as many bounding boxes as there are objects within a given image. 
 YOLO determines the attributes of these bounding boxes using a single regression module in the following format, where Y is the final vector representation for each bounding box. 
 Y = [pc, bx, by, bh, bw, c1, c2]
 
-3) Intersection Over Unions or IOU for short
+3) Intersection Over Unions or IOU
 4) Non-Maximum Suppression. 
 
 Steps to follow:
@@ -205,18 +220,15 @@ Step-1: Install YOLOv5. Get YOLOv5 from here:
 - i) manual download https://github.com/ultralytics/yolov5
 - ii) git clone https://github.com/ultralytics/yolov5.git
 
-Step-2: Install Python. get this from here:
-- https://www.python.org/downloads/
+Step-2: Install Python. Get this from [here](https://www.python.org/downloads/)
 
-Step-3: Install CUDA. Get this from here:
-- https://developer.nvidia.com/cuda-downloads
+Step-3: Install CUDA. Get this from [here](https://developer.nvidia.com/cuda-downloads)
 
-Step-4: Install PyTorch as a Python module. Get the correct pip install version of this by selecting the preferences available at here: https://pytorch.org/get-started/locally/
+Step-4: Install PyTorch as a Python module. Get the correct pip install version of this by selecting the preferences available at [here](https://pytorch.org/get-started/locally/)
 
 Step-5: Install additional modules for YOLOv5 available in requirements.txt inside of this folder
 - pip install -r requirements.txt
-- If visual studio error occure then get it from here to install:
-    - https://visualstudio.microsoft.com/downloads/
+- If visual studio error occure then get it from [here](https://visualstudio.microsoft.com/downloads/) to install
 - After that install PyCOCOTools:
     - pip install git+https://github.com/philferriere/cocoapi.git#subdirectory=PythonAPI
 - Then further run this:
@@ -229,9 +241,10 @@ Further details can be found from this links:
 3) [YOLOv5 Object Detection on Windows (Step-By-Step Tutorial)](https://wandb.ai/onlineinference/YOLO/reports/YOLOv5-Object-Detection-on-Windows-Step-By-Step-Tutorial---VmlldzoxMDQwNzk4)
 
 
-Practical
+YOLO Practical
 ==============
-1) Inference using pretrained YOLOv5 model with Google Colab
+
+## 1) Inference using pretrained YOLOv5 model with Google Colab
 - Open Google Colab/Jupyter Notebook
 - Cloning Github Repository (! git clone https://github.com/ultralytics/yolov5)
 - Installling dependencies (! pip install -r requirements.txt)
@@ -263,7 +276,7 @@ print(
 ! python detect.py --img 640 --conf 0.4 --weights yolov5m.pt --source /full/path/of/the/test image folder
 ```
 
-2) Inference using pretrained YOLOv5 model on Local System
+## 2) Inference using pretrained YOLOv5 model on Local System
 ```
 ## Using Webcamp Data
 #=====================
@@ -280,6 +293,7 @@ print(
 # Go to the location it's stored and see the new image with resultant bounding boxes
 
 ## Using YouTube Video Data
+#==========================
 # Install few more modules to create bounding boxes or just detect objects on a YouTube video
 # pip install pafy
 # pip install youtube_dl
@@ -287,15 +301,206 @@ print(
 # Construct source link of the video id: https://youtu.be/jNQXAC9IVRw
 # Now in cmd terminal type this line to run: python detect.py --source https://youtu.be/jNQXAC9IVRw
 # press ctrl+C in terminal to stop
-# tested with this: python detect.py --source https://youtu.be/AmarqUQzqZg
+# example: python detect.py --source https://youtu.be/AmarqUQzqZg
 
 ```
 
-3) Custom training and inference of YOLO model
-- Get new images
-- Download LabelImg annotation tool from here: https://github.com/HumanSignal/labelImg
-- Do annotation
-- <in progress>
+## 3) Custom training and inference of YOLO model
+
+- prepare dataset
+
+<pre>
+## collect/download images from true sources
+
+## download following tools for annotation and train-test split
+# 1) https://github.com/HumanSignal/labelImg
+# 2) https://github.com/ivangrov/ModifiedOpenLabelling
+
+## for annotation use anyone of them; for this training, labelImg is consideirng
+# install depandancy
+# conda install pyqt=5
+# conda install -c anaconda lxml
+# pyrcc5 -o libs/resources.py resources.qrc
+# run python labelImg.py
+# it will open a GUI for image annotation
+# Once it is opened, change the annotation save format from PascalVOC/CreateML to YOLO
+# In View menu, tick Auto Save Mode
+# Draw bounding boxes and assign class name and then save
+
+## split the data into training and validation
+
+# execute the train_test_split.py from 'ModifiedOpenLabelling' library by typing into the command prompt:
+
+python train_test_split.py
+
+# before execute the above commapnd, configure the input file paths in train_test_split.py file
+# 1) move images folder inside ModifiedOpenLabelling folder
+# 2) move classes.txt file in the same folder and rename it class_list.txt
+# 3) create a folder called bbox_txt and move all annotation text files inside of this and then move this folder to ModifiedOpenLabelling folder
+# 4) now run the above command
+# Copy the custom_dataset folder from ModifiedOpenLabelling into Yolov5 folder
+</pre>
+
+- Open Google Colab
+
+<pre>
+%cd /content/drive/MyDrive/YOLOV5_CUSTOM_TRAINING
+</pre>
+
+- configuring development environment
+
+<pre>
+!git clone https://github.com/ultralytics/yolov5  # clone
+%cd yolov5
+!git reset --hard 68211f72c99915a15855f7b99bf5d93f5631330f (optional)
+!pip install -qr requirements.txt  # install dependencies (ignore errors)
+</pre>
+
+- some imports
+
+<pre>
+import torch
+from IPython.display import Image, clear_output  # to display images
+from utils.google_utils import gdrive_download  # to download models/datasets
+</pre>
+
+- unzipping datasets
+
+<pre>
+%cd /content/drive/MyDrive/YOLOV5_CUSTOM_TRAINING/
+!unzip train.zip
+!unzip test.zip
+</pre>
+
+- create data.yaml file that contains the path of training and validation images and also the classes
+
+<pre>
+import yaml
+config = {'train': 'custom_dataset/train/',
+         'val': 'custom_dataset/valid/',
+         'nc': 6,
+         'names': ['dog', 'person', 'cat', 'laptop', 'bottol', 'animal']}
+
+with open("custom_dataset.yaml", "w") as file:
+   yaml.dump(config, file, default_flow_style=False)
+</pre>
+
+- checking the no. of classes in our datasets (open data.yaml file)
+
+<pre>
+%cat data.yaml
+</pre>
+
+- get the no. of classes from data.yaml file
+
+<pre>
+import yaml
+with open("data.yaml", 'r') as stream:
+    num_classes = str(yaml.safe_load(stream)['nc'])
+</pre>
+
+- see the existing model configuration of yolov5
+
+<pre>
+%cat /content/drive/MyDrive/YOLOV5_CUSTOM_TRAINING/yolov5/models/yolov5s.yaml
+</pre>
+
+- customize iPython writefile so we can write variables
+
+<pre>
+from IPython.core.magic import register_line_cell_magic
+
+@register_line_cell_magic
+def writetemplate(line, cell):
+    with open(line, 'w') as f:
+        f.write(cell.format(**globals()))
+</pre>
+
+- configure model for our dataset (edit 'model' yaml file and save with new name)
+
+<pre>
+# example:
+
+%%writetemplate /content/drive/MyDrive/YOLOV5_CUSTOM_TRAINING/yolov5/models/custom_yolov5s.yaml
+
+# parameters
+nc: {num_classes}  # number of classes
+depth_multiple: 0.33  # model depth multiple
+width_multiple: 0.50  # layer channel multiple
+
+# anchors
+anchors:
+  - [10,13, 16,30, 33,23]  # P3/8
+  - [30,61, 62,45, 59,119]  # P4/16
+  - [116,90, 156,198, 373,326]  # P5/32
+
+# YOLOv5 backbone
+backbone:
+  # [from, number, module, args]
+  [[-1, 1, Focus, [64, 3]],  # 0-P1/2
+   [-1, 1, Conv, [128, 3, 2]],  # 1-P2/4
+   [-1, 3, BottleneckCSP, [128]],
+   [-1, 1, Conv, [256, 3, 2]],  # 3-P3/8
+   [-1, 9, BottleneckCSP, [256]],
+   [-1, 1, Conv, [512, 3, 2]],  # 5-P4/16
+   [-1, 9, BottleneckCSP, [512]],
+   [-1, 1, Conv, [1024, 3, 2]],  # 7-P5/32
+   [-1, 1, SPP, [1024, [5, 9, 13]]],
+   [-1, 3, BottleneckCSP, [1024, False]],  # 9
+  ]
+
+# YOLOv5 head
+head:
+  [[-1, 1, Conv, [512, 1, 1]],
+   [-1, 1, nn.Upsample, [None, 2, 'nearest']],
+   [[-1, 6], 1, Concat, [1]],  # cat backbone P4
+   [-1, 3, BottleneckCSP, [512, False]],  # 13
+
+   [-1, 1, Conv, [256, 1, 1]],
+   [-1, 1, nn.Upsample, [None, 2, 'nearest']],
+   [[-1, 4], 1, Concat, [1]],  # cat backbone P3
+   [-1, 3, BottleneckCSP, [256, False]],  # 17 (P3/8-small)
+
+   [-1, 1, Conv, [256, 3, 2]],
+   [[-1, 14], 1, Concat, [1]],  # cat head P4
+   [-1, 3, BottleneckCSP, [512, False]],  # 20 (P4/16-medium)
+
+   [-1, 1, Conv, [512, 3, 2]],
+   [[-1, 10], 1, Concat, [1]],  # cat head P5
+   [-1, 3, BottleneckCSP, [1024, False]],  # 23 (P5/32-large)
+
+   [[17, 20, 23], 1, Detect, [nc, anchors]],  # Detect(P3, P4, P5)
+  ]
+</pre>
+
+- train.py code can edit based on need
+
+- start training
+
+<pre>
+# train yolov5s on custom data for 100 epochs
+# time its performance
+%%time
+%cd /content/drive/MyDrive/YOLOV5_CUSTOM_TRAINING/yolov5
+!python train.py --img 640 --batch 16 --epochs 100 --data '/content/drive/MyDrive/YOLOV5_CUSTOM_TRAINING/data.yaml' --cfg /content/drive/MyDrive/YOLOV5_CUSTOM_TRAINING/yolov5/models/custom_yolov5s.yaml --weights '' --name yolov5s_results  --cache
+</pre>
+
+- view result
+
+<pre>
+# To see the results for the training at localhost:6006 in your browser using tensorboard, 
+# run this command in another terminal tab
+
+tensorboard --logdir=runs
+</pre>
+
+- inferencing with our custom trained model
+
+<pre>
+%cd /content/drive/MyDrive/YOLOV5_CUSTOM_TRAINING/yolov5
+!python detect.py --weights /content/drive/MyDrive/YOLOV5_CUSTOM_TRAINING/yolov5/runs/train/yolov5s_results2/weights/best.pt --img 640 --conf 0.4 --source ../test/images
+</pre>
+
 
 SSD
 ===========
