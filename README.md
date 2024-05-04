@@ -8,13 +8,16 @@ The Python package `pygeoml` aims to simplify machine learning tasks and automat
 
 1) Inference with pre-trained models
 2) Personalized training on existing models
-3) Sample model from scratch
-4) ML utility toolkit
+3) Transfer Learning
+4) Sample model from scratch
+5) ML utility toolkit
 
 
 ## Inference with Pre-trained Models
 
 ## Personalized Training on Existing Models
+
+## Transfer Learning
 
 ## Sample Model from Scratch
 
@@ -51,7 +54,6 @@ The Python package `pygeoml` aims to simplify machine learning tasks and automat
 - Geospatial Project
 - Time Series Project
 - Generative AI Project
-
 
 
 #### References

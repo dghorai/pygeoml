@@ -239,6 +239,7 @@ Further details can be found from this links:
 1) [YOLO Object Detection Explained](https://www.datacamp.com/blog/yolo-object-detection-explained)
 2) [What Is YOLO Algorithm?](https://www.baeldung.com/cs/yolo-algorithm)
 3) [YOLOv5 Object Detection on Windows (Step-By-Step Tutorial)](https://wandb.ai/onlineinference/YOLO/reports/YOLOv5-Object-Detection-on-Windows-Step-By-Step-Tutorial---VmlldzoxMDQwNzk4)
+4) [Comparing YOLOv3, YOLOv4 and YOLOv5 for Autonomous Landing Spot Detection in Faulty UAVs](https://www.mdpi.com/1424-8220/22/2/464)
 
 
 YOLO Practical
