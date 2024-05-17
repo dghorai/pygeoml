@@ -24,12 +24,12 @@ The Python package `pygeoml` aims to simplify machine learning tasks and automat
 ## ML Utility Toolkit
 
 ## [Theory, Practical, and Assignments](https://github.com/dghorai/fsds-bootcamp-2.0)
-- [Python Basics](https://github.com/dghorai/fsds-bootcamp-2.0/tree/main/python_basics)
-- [Python Advanced](https://github.com/dghorai/fsds-bootcamp-2.0/tree/main/python_advanced)
-- [ML Theory and Assignment](https://github.com/dghorai/fsds-bootcamp-2.0/tree/main/ml_assignment)
-- [ML Practical](https://github.com/dghorai/fsds-bootcamp-2.0/tree/main/ml_practical)
+- [Python Basics](https://github.com/dghorai/pygeoml/tree/main/projects/FSDS-BootCamp-2.0/python_basics)
+- [Python Advanced](https://github.com/dghorai/pygeoml/tree/main/projects/FSDS-BootCamp-2.0/python_advanced)
+- [ML Theory and Assignment](https://github.com/dghorai/pygeoml/tree/main/projects/FSDS-BootCamp-2.0/ml_assignment)
+- [ML Practical](https://github.com/dghorai/pygeoml/tree/main/projects/FSDS-BootCamp-2.0/ml_practical)
 - DL Theory and Assignment
-- [DL Practical](https://github.com/dghorai/fsds-bootcamp-2.0/tree/main/dl_practical)
+- [DL Practical](https://github.com/dghorai/pygeoml/tree/main/projects/FSDS-BootCamp-2.0/dl_practical)
 - CV Theory and Assignment
 - NLP Theory and Assignment
 - NLP Practical
@@ -37,23 +37,25 @@ The Python package `pygeoml` aims to simplify machine learning tasks and automat
 
 
 ## [Data Science Projects](https://github.com/dghorai/data-science-projects)
-- [AWS CI/CD Deployment](https://github.com/dghorai/data-science-projects/tree/main/aws-cicd-deployment)
-- [CIFAR-100 Classifier](https://github.com/dghorai/data-science-projects/tree/main/cifar100classifier-deep-learning)
-- [Flower Recognization](https://github.com/dghorai/data-science-projects/tree/main/flower-recognization-deeplearning)
-- [House Price Prediction](https://github.com/dghorai/data-science-projects/tree/main/house-price-prediction)
-- [Loan Approval Prediction](https://github.com/dghorai/data-science-projects/tree/main/loan-approval-prediction)
-- [Logistic Regression Project](https://github.com/dghorai/data-science-projects/tree/main/logistic-regression-project)
-- [Mobile Screen Detection](https://github.com/dghorai/data-science-projects/tree/main/mobile-screen-detection)
-- [Object Detection](https://github.com/dghorai/data-science-projects/tree/main/object-detection)
-- [Offline Handwritten Text Recognition](https://github.com/dghorai/data-science-projects/tree/main/offline-handwrrittentext-recognition)
-- [Random Forest Regression](https://github.com/dghorai/data-science-projects/tree/main/random-forest-regression)
-- [Titanic Survival Prediction](https://github.com/dghorai/data-science-projects/tree/main/titanic-survival-prediction)
-- [XGBoost Classification Project](https://github.com/dghorai/data-science-projects/tree/main/xgboost-classification-project)
+- [AWS CI/CD Deployment](https://github.com/dghorai/pygeoml/tree/main/projects/AWS-CICD-Deployment)
+- [CIFAR-100 Classifier](https://github.com/dghorai/pygeoml/tree/main/projects/DL-CIFAR100-Classifier)
+- [Flower Recognization](https://github.com/dghorai/pygeoml/tree/main/projects/DL-Flower-Recognization)
+- [House Price Prediction](https://github.com/dghorai/pygeoml/tree/main/projects/House-Price-Prediction)
+- [Loan Approval Prediction](https://github.com/dghorai/pygeoml/tree/main/projects/Loan-Approval-Prediction)
+- [Logistic Regression Project](https://github.com/dghorai/pygeoml/tree/main/projects/Logistic-Regression)
+- [Mobile Screen Detection](https://github.com/dghorai/pygeoml/tree/main/projects/Mobile-Screen-Detection)
+- [OCR Demo](https://github.com/dghorai/pygeoml/tree/main/projects/OCR)
+- [Object Detection](https://github.com/dghorai/pygeoml/tree/main/projects/Object-Detection)
+- [Offline Handwritten Text Recognition](https://github.com/dghorai/pygeoml/tree/main/projects/Offline-Handwrrittentext-Recognition)
+- [Random Forest Regression](https://github.com/dghorai/pygeoml/tree/main/projects/Random-Forest-Regression)
+- [Titanic Survival Prediction](https://github.com/dghorai/pygeoml/tree/main/projects/Titanic-Survival-Prediction)
+- [XGBoost Classification Project](https://github.com/dghorai/pygeoml/tree/main/projects/XGBoost-Classification)
 - Object Segmentation
 - Object Tracking
-- Geospatial Project
+- [Geospatial Project](https://github.com/dghorai/geoutils-rsg/tree/main)
 - Time Series Project
 - Generative AI Project
+- [Web Scraping Demo](https://github.com/dghorai/pygeoml/tree/main/projects/Web-Scraping)
 
 
 #### References
