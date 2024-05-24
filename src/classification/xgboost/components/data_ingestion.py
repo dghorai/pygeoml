@@ -9,7 +9,7 @@ from dataclasses import dataclass
 
 from logger import logging, CustomException
 from classification.xgboost.utils import prepare_data, feature_clipping
-from consts import PRJ_DIR
+from config import PRJ_DIR
 
 
 # initialize the data ingestion configuration

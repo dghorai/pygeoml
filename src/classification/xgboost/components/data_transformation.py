@@ -10,7 +10,7 @@ from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import OrdinalEncoder, StandardScaler, MinMaxScaler
 from logger import logging, CustomException
 from classification.xgboost.utils import save_object
-from consts import PRJ_DIR
+from config import PRJ_DIR
 
 
 @dataclass

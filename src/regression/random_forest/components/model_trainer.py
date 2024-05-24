@@ -5,7 +5,7 @@ from dataclasses import dataclass
 from sklearn.ensemble import RandomForestRegressor
 from logger import logging, CustomException
 from regression.random_forest.utils import save_object, evaluate_model
-from consts import PRJ_DIR
+from config import PRJ_DIR
 
 
 @dataclass

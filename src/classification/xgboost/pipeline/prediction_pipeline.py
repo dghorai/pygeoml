@@ -10,7 +10,7 @@ import pandas as pd
 # from patsy import dmatrix  # one-hot-encoding
 from logger import logging, CustomException
 from classification.xgboost.utils import load_object, prepare_data, feature_clipping
-from consts import PRJ_DIR
+from config import PRJ_DIR
 
 
 class PredictPipeline:

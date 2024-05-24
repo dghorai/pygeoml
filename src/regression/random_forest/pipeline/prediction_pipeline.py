@@ -4,7 +4,7 @@ import pandas as pd
 
 from logger import logging, CustomException
 from regression.random_forest.utils import load_object
-from consts import PRJ_DIR
+from config import PRJ_DIR
 
 
 class PredictPipeline:

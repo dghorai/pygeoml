@@ -7,7 +7,7 @@ from patsy import dmatrices
 from sklearn.model_selection import train_test_split
 from dataclasses import dataclass
 from logger import logging, CustomException
-from consts import PRJ_DIR
+from config import PRJ_DIR
 
 
 # initialize the data ingestion configuration

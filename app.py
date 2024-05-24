@@ -88,7 +88,7 @@ match app_id:
     case 3:
         from classification.cnn_classifier.pipeline.predict import PredictionPipeline
         from classification.cnn_classifier.utils.utilities import decode_image
-        from consts import PRJ_DIR
+        from config import PRJ_DIR
 
         os.putenv('LANG', 'en_US.UTF-8')
         os.putenv('LC_ALL', 'en_US.UTF-8')

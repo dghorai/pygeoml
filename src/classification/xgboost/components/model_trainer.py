@@ -5,7 +5,7 @@ from dataclasses import dataclass
 from xgboost import XGBClassifier
 from logger import logging, CustomException
 from classification.xgboost.utils import save_object, evaluate_model
-from consts import PRJ_DIR
+from config import PRJ_DIR
 
 @dataclass
 class ModelTrainerConfig:
