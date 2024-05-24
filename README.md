@@ -1,10 +1,10 @@
 # pygeoml
 
-Data Science Application using AI/ML Algorithms. PyGeoML consisting of research on geospatial and machine learning toolsets and their application.
+A comprehensive, step-by-step guide on machine learning algorithms that can be implemented in Python and decode data science for practical applications. It also consisting of research on geospatial and machine learning toolsets and their application.
 
 ## Introduction
 
-The Python package `pygeoml` aims to simplify machine learning tasks and automate spatial and non-spatial data science projects. Learning, enhancing and sharing knowledge in the field of data science is the purpose of this library. This library is a collection of existing models and their applications and has the following features for a comprehensive conceptual understanding of machine learning models: 
+The Python package `pygeoml` aims to simplify machine learning tasks and automate spatial and non-spatial data science projects. This library is meant to be a resource for learning, growing, and sharing information about data science. This library is a collection of existing models and their applications and has the following features for a comprehensive conceptual understanding of machine learning models: 
 
 1) Inference with pre-trained models
 2) Personalized training on existing models
