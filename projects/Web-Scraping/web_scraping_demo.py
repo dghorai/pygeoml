@@ -45,13 +45,27 @@ import requests
 import pandas as pd
 
 from selenium import webdriver
-from selenium.webdriver.chrome.options import Options as ch_ops
-from selenium.webdriver.firefox.options import Options as fx_ops
-from selenium.webdriver.common.keys import Keys
-from html.parser import HTMLParser
+# from selenium.webdriver.chrome.options import Options as ch_ops
+# from selenium.webdriver.firefox.options import Options as fx_ops
+# from selenium.webdriver.common.keys import Keys
+# from html.parser import HTMLParser
 from xml.etree.ElementTree import parse
 from bs4 import BeautifulSoup as bs
 from urllib.request import urlopen as uReq
+
+
+CHROME_OPTIONS = '--user-agent="Mozilla/5.0 (Windows Phone 10.0; Android 4.2.1; Microsoft; Lumia 640 XL LTE) \
+    AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.135 Mobile Safari/537.36 Edge/12.10166"'
+
+TASK_ID = 1
+
+EXAMPLE_STAGE_NAMES = {
+    1: "webscraper: targetfile",
+    2: "webscraper: byxpath",
+    3: "webscraper: bylogin",
+    4: "webscraper: screenxy"
+}
+
 
 
 # EXAMPLE-1:
@@ -61,8 +75,12 @@ from urllib.request import urlopen as uReq
 def webscraper_targetfile(download_dir, q_station, from_year=None, to_year=None):
     # get web driver
     chrome_driver = os.path.join(download_dir, 'chromedriver.exe')
+    # define chrome option
+    chrome_options = webdriver.ChromeOptions()
+    chrome_options.add_argument(CHROME_OPTIONS)
     # create a new chrome session
-    driver = webdriver.Chrome(chrome_driver)
+    # driver = webdriver.Chrome(chrome_driver)
+    driver = webdriver.Chrome(executable_path=chrome_driver, chrome_options=chrome_options)
     driver.maximize_window()
 
     # download data
@@ -121,8 +139,12 @@ def webscraper_byxpath(download_dir, years=None):
     # get web driver
     # https://www.techbeamers.com/selenium-webdriver-python-tutorial/
     chrome_driver = os.path.join(download_dir, 'chromedriver.exe')
+    # define chrome option
+    chrome_options = webdriver.ChromeOptions()
+    chrome_options.add_argument(CHROME_OPTIONS)
     # create a new chrome session
-    driver = webdriver.Chrome(chrome_driver)
+    # driver = webdriver.Chrome(chrome_driver)
+    driver = webdriver.Chrome(executable_path=chrome_driver, chrome_options=chrome_options)
     driver.maximize_window()
 
     # find and download data
@@ -161,8 +183,12 @@ def webscraper_byxpath(download_dir, years=None):
 def webscraper_bylogin(download_dir, data_urls, user_name=None, user_password=None):
     # get web driver
     chrome_driver = os.path.join(download_dir, 'chromedriver.exe')
+    # define chrome option
+    chrome_options = webdriver.ChromeOptions()
+    chrome_options.add_argument(CHROME_OPTIONS)
     # create a new chrome session
-    driver = webdriver.Chrome(chrome_driver)
+    # driver = webdriver.Chrome(chrome_driver)
+    driver = webdriver.Chrome(executable_path=chrome_driver, chrome_options=chrome_options)
     driver.implicitly_wait(30)
     driver.maximize_window()
     driver.get('https://urs.earthdata.nasa.gov')
@@ -207,7 +233,7 @@ def webscraper_product_reviews1(url: object, n: object) -> object:
         each_url = url[0:pgnum]+str(p+1)
         page = requests.get(each_url, headers=HEADERS)
         page_text = page.text
-        soup = BeautifulSoup(page_text)  # html5lib/html.parser is a html parser
+        soup = bs(page_text)  # html5lib/html.parser is a html parser
         each_pg_revs = soup.find_all('span', {'data-hook': 'review-body'})  #https://medium.com/analytics-vidhya/web-scraping-amazon-reviews-a36bdb38b257
         # loop over each-page to collect reviews
         for each_rev in each_pg_revs:
@@ -231,7 +257,7 @@ def webscraper_product_reviews2(search_string=None):
     prod_html = bs(prodRes.text, "html.parser")
     print(prod_html)
     commentboxes = prod_html.find_all('div', {'class': "_16PBlm"})
-    filename = searchString + ".csv"
+    filename = search_string + ".csv"
     fw = open(filename, "w")
     headers = "Product, Customer Name, Rating, Heading, Comment \n"
     fw.write(headers)
@@ -255,7 +281,7 @@ def webscraper_product_reviews2(search_string=None):
         except Exception as e:
             print("Exception while creating dictionary: ",e)
         mydict = {
-            "Product": searchString,
+            "Product": search_string,
             "Name": name,
             "Rating": rating,
             "CommentHead": commentHead,
@@ -271,7 +297,7 @@ def webscraper_product_reviews2(search_string=None):
 # website link: http://www.arpa.piemonte.it/rischinaturali/accesso-ai-dati/annali_meteoidrologici/annali-meteo-idro/banca-dati-idrologica.html
 
 def webscraper_screenxy():
-    def click_grid(x, y):
+    def Click_Grid(x, y):
         ctypes.windll.user32.SetCursorPos(x, y)
         ctypes.windll.user32.mouse_event(2, 0, 0, 0, 0)
         ctypes.windll.user32.mouse_event(4, 0, 0, 0, 0)
@@ -386,51 +412,78 @@ def webscraper_screenxy():
         if int(a) == 1:
             # this window has total 11 rows/lines/stations
             for i in range(11):
-                click_grid(240, 200)
+                Click_Grid(240, 200)
                 time.sleep(2)
         else:
             break
     return
 
 
+
+# manage download examples
+def switch_case(stage_id, stage_name):
+    match stage_id:
+        case 1:
+            print(stage_name)
+            # ex1
+            download_dir = '/temp'
+            q_station = ['08155PG','19850PG','29850PG']
+            webscraper_targetfile(
+                download_dir,
+                q_station,
+                from_year=2010,
+                to_year=2020
+            )
+        case 2:
+            print(stage_name)
+            # ex2
+            years = [2010, 2011, 2012]
+            webscraper_byxpath(
+                download_dir,
+                years=years
+            )
+        case 3:
+            print(stage_name)
+            # ex3
+            data_urls = [
+                'http://e4ftl01.cr.usgs.gov//MODV6_Dal_D/SRTM/SRTMGL3.003/2000.02.11/N00E109.SRTMGL3.hgt.zip'
+                'http://e4ftl01.cr.usgs.gov//MODV6_Dal_D/SRTM/SRTMGL3.003/2000.02.11/N00E022.SRTMGL3.hgt.zip'
+                'http://e4ftl01.cr.usgs.gov//MODV6_Dal_D/SRTM/SRTMGL3.003/2000.02.11/N00E027.SRTMGL3.hgt.zip'
+                ]
+            webscraper_bylogin(
+                download_dir,
+                data_urls,
+                user_name="<type-user-name>",
+                user_password="<type-password>"
+            )
+        case 4:
+            print(stage_name)
+            # ex4
+            amazon_url = 'https://www.amazon.com/KidKraft-Kids-Study-Desk-Chair-White/product-reviews/B00K3EY9G4/ref=cm_cr_arp_d_paging_btm_next_2?ie=UTF8&reviewerType=all_reviews&pageNumber=1'
+            # get reviews list
+            reviews_list: object = webscraper_product_reviews1(amazon_url, 35) # total review is 347 and each page review is 10
+            print(len(reviews_list))
+            raw_reviews = pd.DataFrame({'reviews': reviews_list})
+            raw_reviews.shape  # examine dimensions/shape of dataframe.
+            raw_reviews.head(10)  # examine first n (i.e 10 in this case) rows of dataframe
+            ###
+            flipkart_prod_reviews = webscraper_product_reviews2(search_string='iphone 10')
+            # ex5
+            # open the webpage and then run the below application
+            webscraper_screenxy()
+
+
 if __name__ == '__main__':
-    # ex1
-    download_dir = '/temp'
-    q_station = ['08155PG','19850PG','29850PG']
-    webscraper_targetfile(
-        download_dir,
-        q_station,
-        from_year=2010,
-        to_year=2020
-    )
-    # ex2
-    years = [2010, 2011, 2012]
-    webscraper_byxpath(
-        download_dir,
-        years=years
-    )
-    # ex3
-    data_urls = [
-        'http://e4ftl01.cr.usgs.gov//MODV6_Dal_D/SRTM/SRTMGL3.003/2000.02.11/N00E109.SRTMGL3.hgt.zip'
-        'http://e4ftl01.cr.usgs.gov//MODV6_Dal_D/SRTM/SRTMGL3.003/2000.02.11/N00E022.SRTMGL3.hgt.zip'
-        'http://e4ftl01.cr.usgs.gov//MODV6_Dal_D/SRTM/SRTMGL3.003/2000.02.11/N00E027.SRTMGL3.hgt.zip'
-        ]
-    webscraper_bylogin(
-        download_dir,
-        data_urls,
-        user_name="<type-user-name>",
-        user_password="<type-password>"
-    )
-    # ex4
-    amazon_url = 'https://www.amazon.com/KidKraft-Kids-Study-Desk-Chair-White/product-reviews/B00K3EY9G4/ref=cm_cr_arp_d_paging_btm_next_2?ie=UTF8&reviewerType=all_reviews&pageNumber=1'
-    # get reviews list
-    reviews_list: object = webscraper_product_reviews1(amazon_url, 35) # total review is 347 and each page review is 10
-    print(len(reviews_list))
-    raw_reviews = pd.DataFrame({'reviews': reviews_list})
-    raw_reviews.shape  # examine dimensions/shape of dataframe.
-    raw_reviews.head(10)  # examine first n (i.e 10 in this case) rows of dataframe
-    ###
-    flipkart_prod_reviews = webscraper_product_reviews2(search_string='iphone 10')
-    # ex5
-    # open the webpage and then run the below application
-    webscraper_screenxy()
+    task_ids = list(EXAMPLE_STAGE_NAMES.keys())
+
+    if TASK_ID in task_ids:
+        # get task_name
+        task_name = EXAMPLE_STAGE_NAMES[TASK_ID]
+
+        # check task_name is string or dictionary
+        if isinstance(task_name, str):
+            switch_case(TASK_ID, task_name)
+        else:
+            for task_no in task_name.keys():
+                stage_name = task_name[task_no]
+                switch_case(task_no, stage_name)
