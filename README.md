@@ -12,6 +12,7 @@ The Python package `pygeoml` aims to simplify machine learning tasks and automat
 4) Sample model from scratch
 5) ML utility toolkit
 
+![alt text](static/image/readme-image.png)
 
 ## Inference with Pre-trained Models
 
